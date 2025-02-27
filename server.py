@@ -18,8 +18,7 @@ bootstrap=Bootstrap5(app)
 def home():
     add_file_form=AddFileForm()
     if add_file_form.validate_on_submit():
-        file=request.form['file']
-        print(file)
+        print('dziala')
     return render_template('index.html', form=add_file_form)
 
 if __name__=='__main__':
