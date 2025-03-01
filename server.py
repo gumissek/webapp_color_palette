@@ -1,4 +1,4 @@
-#https://github.com/gumissek/webapp_color_palette
+# https://github.com/gumissek/webapp_color_palette
 import os
 from pathlib import Path
 from flask import Flask, render_template, request, redirect, url_for, flash
@@ -49,22 +49,22 @@ def home():
             palette = image.getpalette()
             # wyciagam 10 najczesciej wystepujacych kolorow z obrazka - > zawiera ilosc wystapien i index koloru
             top10colors = sorted(image.getcolors(maxcolors=256), reverse=True)[:10]
-            list_colors_RGB=[]
-            list_colors_hex=[]
+            list_colors_RGB = []
+            list_colors_hex = []
 
             for color in top10colors:
-                color_index=color[1]
-                r = palette[color_index*3]
-                g = palette[color_index*3+1]
-                b = palette[color_index*3+2]
+                color_index = color[1]
+                r = palette[color_index * 3]
+                g = palette[color_index * 3 + 1]
+                b = palette[color_index * 3 + 2]
                 r_hex = f'{r:02X}'
                 g_hex = f'{g:02X}'
                 b_hex = f'{b:02X}'
-                list_colors_RGB.append((r,g,b))
+                list_colors_RGB.append((r, g, b))
                 list_colors_hex.append(f'#{r_hex}{g_hex}{b_hex}')
-            color_list=[{'rgb': list_colors_RGB[i],'hex':list_colors_hex[i]} for i in range(len(list_colors_hex))]
+            color_list = [{'rgb': list_colors_RGB[i], 'hex': list_colors_hex[i]} for i in range(len(list_colors_hex))]
             os.remove(f'{UPLOAD_FOLDER}/{file_name}')
-            return render_template('colors.html',color_list=color_list,file_name=file_name)
+            return render_template('colors.html', color_list=color_list, file_name=file_name)
         else:
             flash('That extension is not allowed! Your file should be .png .jpg .jpeg')
             return redirect(url_for('home'))
