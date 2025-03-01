@@ -1,5 +1,4 @@
-# pobieranie zdjecia
-# wyciagniecie ze zdjeica danych za pomoca numpy
+#https://github.com/gumissek/webapp_color_palette
 import os
 from pathlib import Path
 from flask import Flask, render_template, request, redirect, url_for, flash
@@ -37,7 +36,7 @@ def home():
 
         # jesli pole formularza jest puste to zwracam strone
         if file.filename == '':
-            flash('Nie wybrano pliku')
+            flash('No selected file!')
             return redirect(url_for('home'))
         # sprawdzam czy jest dobre rozszerzenie pliku
         if file and allowed_extension(file.filename):
@@ -58,7 +57,10 @@ def home():
                 b = palette[color_index*3+2]
                 list_colors_RGB.append((r,g,b))
             os.remove(f'{UPLOAD_FOLDER}/{file_name}')
-            return render_template('colors.html',color_list_rgb=list_colors_RGB)
+            return render_template('colors.html',color_list_rgb=list_colors_RGB,file_name=file_name,file=file)
+        else:
+            flash('That extension is not allowed! Your file should be .png .jpg .jpeg')
+            return redirect(url_for('home'))
     return render_template('index.html', form=add_file_form)
 
 

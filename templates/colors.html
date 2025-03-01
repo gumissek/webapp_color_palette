@@ -1,16 +1,33 @@
 {%extends 'base.html'%}
-{%block title%}INDEX{%endblock%}
+{%block title%}Pallete {{file_name}}{%endblock%}
 {%from 'bootstrap5/form.html' import render_form%}
 
 {%block content%}
-<div class="container">
+<div class="container text-center my-5">
+    {%if file_name%}
+    <h1>Palette of 10 most appearing colors in: {{file_name}}</h1>
+    {%endif%}
+
     {% if color_list_rgb%}
-    {%for color in color_list_rgb%}
-    <p>R {{color[0]}} G {{color[1]}}  B {{color[2]}}</p>
+    <table class="table table-bordered border-dark table-striped-columns my-4">
+        <thead class="table-dark">
+        <tr>
+            <th scope="col">Color</th>
+            <th scope="col">Color RGB</th>
 
-    {%endfor%}
+        </tr>
+        </thead>
+        <tbody class="table-group-divider">
+        {%for color in color_list_rgb%}
+        <tr>
+            <td style="background-color:rgb{{color}}"></td>
+            <td>{{color}}</td>
 
+        </tr>
+        {%endfor%}
+        </tbody>
+    </table>
+    <a href={{url_for('home')}} class="btn btn-primary">Process another file</a>
     {%endif %}
-
 </div>
 {%endblock%}
