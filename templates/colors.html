@@ -1,0 +1,16 @@
+{%extends 'base.html'%}
+{%block title%}INDEX{%endblock%}
+{%from 'bootstrap5/form.html' import render_form%}
+
+{%block content%}
+<div class="container">
+    {% if color_list_rgb%}
+    {%for color in color_list_rgb%}
+    <p>R {{color[0]}} G {{color[1]}}  B {{color[2]}}</p>
+
+    {%endfor%}
+
+    {%endif %}
+
+</div>
+{%endblock%}
