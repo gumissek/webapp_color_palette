@@ -8,21 +8,21 @@
     <h1>Palette of 10 most appearing colors in: {{file_name}}</h1>
     {%endif%}
 
-    {% if color_list_rgb%}
+    {% if color_list%}
     <table class="table table-bordered border-dark table-striped-columns my-4">
         <thead class="table-dark">
         <tr>
             <th scope="col">Color</th>
             <th scope="col">Color RGB</th>
-
+            <th scope="col">Color hex</th>
         </tr>
         </thead>
         <tbody class="table-group-divider">
-        {%for color in color_list_rgb%}
+        {%for color in color_list%}
         <tr>
-            <td style="background-color:rgb{{color}}"></td>
-            <td>{{color}}</td>
-
+            <td style="background-color:{{color['hex']}}"></td>
+            <td>{{color['rgb']}}</td>
+            <td>{{color['hex']}}</td>
         </tr>
         {%endfor%}
         </tbody>
